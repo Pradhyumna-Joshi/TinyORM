@@ -1,4 +1,5 @@
 export abstract class Column<T> {
+  declare readonly _: T;
   public readonly name: string;
   public readonly sqlType: string;
   protected isPrimaryKey: boolean = false;
@@ -43,8 +44,6 @@ class TextColumn extends Column<string> {
     super(name, "TEXT");
   }
 }
-
-// exports
 
 export type ORMColumn = Column<number> | Column<string>;
 
