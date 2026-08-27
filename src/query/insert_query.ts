@@ -1,17 +1,16 @@
-import type { ORMTable, SQLResponse } from "../dialect/types";
+import type { InferTable, ORMTable, SQLResponse } from "../common/types";
 import type { DatabaseDriver } from "../driver/base_driver";
 import { BaseQuery } from "./base_query";
 
-export class InsertQuery extends BaseQuery {
-  private table: ORMTable;
-  private valuesData:
-    Record<string, unknown> | Record<string, unknown>[] | null = null;
-  constructor(table: ORMTable, driver: DatabaseDriver) {
+export class InsertQuery<T extends ORMTable> extends BaseQuery {
+  private table: T;
+  private valuesData: InferTable<T> | InferTable<T>[] | null = null;
+  constructor(table: T, driver: DatabaseDriver) {
     super(driver);
     this.table = table;
   }
 
-  values(values: Record<string, unknown> | Record<string, unknown>[]): this {
+  values(values: InferTable<T> | InferTable<T>[]): this {
     this.valuesData = values;
     return this;
   }

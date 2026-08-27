@@ -1,4 +1,4 @@
-import type { SQLResponse } from "../dialect/types";
+import type { SQLResponse } from "../common/types";
 import type { DatabaseDriver } from "../driver/base_driver";
 
 export abstract class BaseQuery {

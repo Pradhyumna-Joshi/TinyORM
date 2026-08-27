@@ -1,4 +1,4 @@
-import type { SQLResponse } from "../dialect/types";
+import type { SQLResponse } from "../common/types";
 import type { SQLContext } from "../query/select_query";
 
 export abstract class Expression {

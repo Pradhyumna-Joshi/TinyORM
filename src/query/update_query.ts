@@ -1,20 +1,20 @@
 import { BaseQuery } from "./base_query";
-import type { ORMTable, SQLResponse } from "../dialect/types";
+import type { InferTable, ORMTable, SQLResponse } from "../common/types";
 import type { DatabaseDriver } from "../driver/base_driver";
 import type { Expression } from "../expressions/base_exp";
 import type { SQLContext } from "./select_query";
 
-export class UpdateQuery extends BaseQuery {
-  private table: ORMTable;
-  private valuesData: Record<string, unknown> | null = null;
+export class UpdateQuery<T extends ORMTable> extends BaseQuery {
+  private table: T;
+  private valuesData: Partial<InferTable<T>> | null = null;
   private whereClause: Expression | null = null;
 
-  constructor(table: ORMTable, driver: DatabaseDriver) {
+  constructor(table: T, driver: DatabaseDriver) {
     super(driver);
     this.table = table;
   }
 
-  set(values: Record<string, unknown>): this {
+  set(values: Partial<InferTable<T>>): this {
     this.valuesData = values;
     return this;
   }

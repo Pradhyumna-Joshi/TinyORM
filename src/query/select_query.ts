@@ -1,7 +1,6 @@
-import type { ORMTable, SQLResponse } from "../dialect/types";
+import type { ORMColumn, ORMTable, SQLResponse } from "../common/types";
 import type { DatabaseDriver } from "../driver/base_driver";
 import type { Expression } from "../expressions/base_exp";
-import type { ORMColumn } from "../schema/column";
 import { BaseQuery } from "./base_query";
 
 export type SQLContext = {

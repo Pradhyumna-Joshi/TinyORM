@@ -1,4 +1,4 @@
-import type { ORMColumn } from "./column";
+import type { ORMColumn } from "../common/types";
 
 export type Columns = Record<string, ORMColumn>;
 

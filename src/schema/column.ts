@@ -45,8 +45,6 @@ class TextColumn extends Column<string> {
   }
 }
 
-export type ORMColumn = Column<number> | Column<string>;
-
 export function integer(name: string) {
   return new IntegerColumn(name);
 }
