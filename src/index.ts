@@ -23,6 +23,7 @@ const title: Column<string> = users.title;
 let resp = generateCreateTable(users);
 //console.log(resp);
 
+/*
 const result: QueryResult<QueryArrayResult> = await db
   .select(users.id, users.name)
   .from(users)
@@ -31,3 +32,17 @@ const result: QueryResult<QueryArrayResult> = await db
   .execute();
 
 console.log(result.rows);
+*/
+
+try {
+  const query = await db
+    .insert(users)
+    .values([
+      { id: 6, name: "Dave", age: 20 },
+      { id: 7, name: "Eve", age: 22 },
+    ])
+    .execute();
+  console.log(query);
+} catch (error) {
+  console.log(error);
+}
