@@ -7,7 +7,6 @@ export function generateCreateTable(table: ORMTable): SQLResponse {
   sqlStr += ` "${table.tableName}" `;
 
   // add columns
-  // add start
   sqlStr += " (";
 
   // add column metadata
@@ -17,7 +16,6 @@ export function generateCreateTable(table: ORMTable): SQLResponse {
 
   sqlStr += colStr;
 
-  // add end
   sqlStr += " )";
 
   return {

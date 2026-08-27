@@ -2,14 +2,11 @@ import { SQL } from "bun";
 import { Column, integer, text } from "./schema/column";
 import { pgTable } from "./schema/table";
 import { generateCreateTable } from "./dialect/postgres";
-import { eq, Expression } from "./query/expression";
 import { db } from "./database";
-/*
-const sql = new SQL(process.env.DATABASE_URL!);
-
-const data = await sql`SELECT * FROM USERS`;
-console.log(data);
-*/
+import type { SQLContext } from "./query/select_query";
+import { eq, gt, lt, ne } from "./expressions/comparison_exp";
+import { or } from "./expressions/binary_exp";
+import type { QueryArrayResult, QueryResult } from "pg";
 
 const users = pgTable("users", {
   id: integer("id").primaryKey().notNull(),
@@ -26,8 +23,11 @@ const title: Column<string> = users.title;
 let resp = generateCreateTable(users);
 //console.log(resp);
 
-const exp = eq(users.age, 123);
-console.log(exp.flatten(1).sql);
+const result: QueryResult<QueryArrayResult> = await db
+  .select(users.id, users.name)
+  .from(users)
+  .where(or(gt(users.age, 25), ne(users.name, "Bob")))
+  .limit(10)
+  .execute();
 
-const query = db.select().from(users).where(eq(users.age, 25)).flatten();
-console.log(query);
+console.log(result.rows);
