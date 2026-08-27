@@ -3,6 +3,7 @@ import type { DatabaseDriver } from "./driver/base_driver";
 import { PostgresDriver } from "./driver/postgres";
 import { InsertQuery } from "./query/insert_query";
 import { SelectQuery } from "./query/select_query";
+import { UpdateQuery } from "./query/update_query";
 import type { Column, ORMColumn } from "./schema/column";
 
 class Database {
@@ -14,6 +15,10 @@ class Database {
 
   insert(table: ORMTable) {
     return new InsertQuery(table, this.driver);
+  }
+
+  update(table: ORMTable) {
+    return new UpdateQuery(table, this.driver);
   }
 }
 

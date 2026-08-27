@@ -26,7 +26,7 @@ export class InsertQuery extends BaseQuery {
       : [this.valuesData];
 
     if (rows.length === 0) {
-      throw new Error("INSERT requires atleast one row");
+      throw new Error("INSERT requires at least one row");
     }
 
     const columns = Object.keys(rows[0]!);

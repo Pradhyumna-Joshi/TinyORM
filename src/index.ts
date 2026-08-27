@@ -36,11 +36,12 @@ console.log(result.rows);
 
 try {
   const query = await db
-    .insert(users)
-    .values([
-      { id: 6, name: "Dave", age: 20 },
-      { id: 7, name: "Eve", age: 22 },
-    ])
+    .update(users)
+    .set({
+      name: "Bob",
+      age: 31,
+    })
+    .where(eq(users.id, 2))
     .execute();
   console.log(query);
 } catch (error) {
